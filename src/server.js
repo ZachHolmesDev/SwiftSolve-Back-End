@@ -35,11 +35,10 @@ app.use((request, response, next) => {
         host  : request.hostname,
         ip    : request.ip,
     };
-    console.log("Request received:\n" + JSON.stringify(importantRequestInfo, null, 4) + "\n"
-                  + "Request body:\n" + JSON.stringify(request.body, null, 4) + "\n"); 
+    console.log("Request received:\n" + JSON.stringify(importantRequestInfo, null, 4)) + "\n"
+                //   + "Request body:\n" + JSON.stringify(response.body, null, 4) + "\n"); 
     next();
 });
-
 
 // dose it work? lol
 app.get("/", (request, response) => {
@@ -67,9 +66,13 @@ app.get("/databaseHealth", (request, response) => {
 
 // routers
 
-const UserRouter = require('./controllers/UserRouter');
+const UserRouter = require('./Routers/UserRouter');
+const TicketRouter = require('./Routers/TicketRouter');
+// const CommentRouter = require('./Routers/CommentRouter');
 
 app.use('/user', UserRouter);
+app.use('/ticket', TicketRouter);
+// app.use('/comment', CommentRouter);
 
 
 
