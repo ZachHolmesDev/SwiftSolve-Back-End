@@ -19,19 +19,12 @@ const PORT = process.env.PORT || 3000;
 // ---------
 // connect to database
 databaseConnect()
-	// .then(() => {
-	// 	console.log("Database connected successfully!");
-	// })
-	// .catch((error) => {
-	// 	console.log(
-	// 		`Some error occurred connecting to the database! It was:${error}`
-	// 	);
-	// });
-
 
 
 // ---------
 // routes 
+
+// util routes 
 
 // log all requests in the console
 app.use((request, response, next) => {
@@ -42,7 +35,8 @@ app.use((request, response, next) => {
         host  : request.hostname,
         ip    : request.ip,
     };
-    console.log("Request received:\n" + JSON.stringify(importantRequestInfo, null, 4)); 
+    console.log("Request received:\n" + JSON.stringify(importantRequestInfo, null, 4) + "\n"
+                  + "Request body:\n" + JSON.stringify(request.body, null, 4) + "\n"); 
     next();
 });
 
@@ -53,7 +47,6 @@ app.get("/", (request, response) => {
 		message:"Hello world"
 	});
 });
-
 
 // Return useful details from the database connection
 // DOCS: https://mongoosejs.com/docs/api/connection.html
@@ -70,6 +63,16 @@ app.get("/databaseHealth", (request, response) => {
         dbHost    : databaseHost
     })
 });             
+
+
+// routers
+
+const UserRouter = require('./controllers/UserRouter');
+
+app.use('/user', UserRouter);
+
+
+
 
 
 module.exports = {

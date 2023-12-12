@@ -22,6 +22,7 @@ async function databaseConnect() {
 
     try {
         await mongoose.connect(databaseURL);
+        // BUG : console log not running, something simple im missing 
         console.log("Database connected successfully!");
     }
     catch (error) {
