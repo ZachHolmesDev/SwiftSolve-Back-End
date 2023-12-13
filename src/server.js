@@ -25,20 +25,11 @@ databaseConnect()
 // routes 
 
 // util routes 
+const {requestLogger, responseLogger} = require('./utils/loggers');
 
-// log all requests in the console
-app.use((request, response, next) => {
-    let importantRequestInfo = {
-        url   : request.originalUrl,
-        params: request.params,
-        verb  : request.method,
-        host  : request.hostname,
-        ip    : request.ip,
-    };
-    console.log("Request received:\n" + JSON.stringify(importantRequestInfo, null, 4)) + "\n"
-                //   + "Request body:\n" + JSON.stringify(response.body, null, 4) + "\n"); 
-    next();
-});
+// log all requests
+app.use(requestLogger);
+
 
 // dose it work? lol
 app.get("/", (request, response) => {
@@ -73,7 +64,7 @@ const TicketRouter = require('./routers/TicketRouter');
 app.use('/user', UserRouter);
 app.use('/ticket', TicketRouter);
 
-
+app.use('/',responseLogger);
 
 
 

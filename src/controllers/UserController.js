@@ -21,6 +21,9 @@ const UserController = {
     // Route: GET /user
     // Logic to retrieve all users
     async getUsers(request, response) {
+        response.json({
+            message: "Test getting all users"
+        });
     },
 
     // Route: GET /user/:id
