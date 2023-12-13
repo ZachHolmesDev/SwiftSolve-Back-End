@@ -1,5 +1,5 @@
 const express = require('express');
-const TicketController = require('./controllers/TicketController');
+const TicketController = require('../controllers/TicketController');
 const CommentRouter = require('./CommentRouter');
 const router = express.Router();
 
@@ -19,8 +19,7 @@ router.put('/:ticketId', TicketController.updateTicket);
 // Route to delete a specific ticket by ID
 router.delete('/:ticketId', TicketController.deleteTicket);
 
-// Use CommentRouter for comment-related routes
-// This means any route starting with '/:ticketId/comments' will be handled by CommentRouter
+// any route starting with '/:ticketId/comments' will be handled by CommentRouter
 router.use('/:ticketId/comment', CommentRouter);
 
 

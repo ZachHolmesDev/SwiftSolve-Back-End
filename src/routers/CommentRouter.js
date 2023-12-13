@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router({ mergeParams: true });
-const CommentController = require('./controllers/CommentController');
+const CommentController = require('../controllers/CommentController');
 
 
 // route to get all comments for a specific ticket

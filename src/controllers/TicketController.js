@@ -1,34 +1,38 @@
-const TicketModel = require('../../models/TicketModel'); 
+const TicketModel = require('../models/TicketModel'); 
 
 const TicketController = {
-    async createTicket(request, response) {
-        // Logic to create a ticket
-        
-    },
-
+    
+    // Route: GET /ticket
     async getAllTickets(request, response) {
         // Logic to get all tickets
         response.json({
             message: "Test getting all tickets"
         });
     },
-
+    
+    // Route: GET /ticket/:ticketId
+    // Logic to get a specific ticket by ID
     async getTicketById(request, response) {
-        // Logic to get a specific ticket by ID
         response.json({
             message: "Test getting a specific ticket by ID"
         });
     },
+    
+    // Route: POST /ticket
+    // Logic to create a ticket
+    async createTicket(request, response) {
+    },
 
+    // Route: PUT /ticket/:ticketId
+    // Logic to update a ticket
     async updateTicket(request, response) {
-        // Logic to update a ticket
     },
 
+    // Route: DELETE /ticket/:ticketId
+    // Logic to delete a ticket
     async deleteTicket(request, response) {
-        // Logic to delete a ticket
-    },
-
-    // ... add other ticket-related methods as needed ...
+    }
 };
+
 
 module.exports = TicketController;

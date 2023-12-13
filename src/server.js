@@ -66,13 +66,12 @@ app.get("/databaseHealth", (request, response) => {
 
 // routers
 
-const UserRouter = require('./Routers/UserRouter');
-const TicketRouter = require('./Routers/TicketRouter');
-// const CommentRouter = require('./Routers/CommentRouter');
+const UserRouter = require('./routers/UserRouter');
+const TicketRouter = require('./routers/TicketRouter');
+
 
 app.use('/user', UserRouter);
 app.use('/ticket', TicketRouter);
-// app.use('/comment', CommentRouter);
 
 
 
