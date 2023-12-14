@@ -1,4 +1,4 @@
-const UserModel = require('../models/UserModel'); 
+const User = require('../models/UserModel');
 
 
 
@@ -6,39 +6,74 @@ const UserModel = require('../models/UserModel');
 const UserController = {
 
     // Route: POST /user/register
-    async registerUser(request, response) {
-        // Logic for registering a new user
-        response.json({
-            message: "Test Registering a new user"
-        }); 
+    // register a new user
+    async registerUser(request, response, next) {
+        try {
+            let user = new User(request.body);
+            let result = await user.save();
+            response.json(result);
+        } catch (error) {
+            next(error);
+        }
     },
 
     // Route: POST /user/login
-    // Logic for user login and token generation
+    // user login and token generation
     async loginUser(request, response) {
+
     },
 
     // Route: GET /user
-    // Logic to retrieve all users
+    // retrieve all users
     async getUsers(request, response) {
-        response.json({
-            message: "Test getting all users"
-        });
+        try {
+            let users = await User.find({});
+            response.json(users);
+        } catch (error) {
+            next(error);
+        }
     },
 
     // Route: GET /user/:id
-    // Logic to retrieve a single user by ID
+    // retrieve a single user by ID
     async getUserById(request, response) {
+        try {
+            let user = await User.findById(request.params.id);
+            response.json(user);
+        } catch (error) {
+            next(error);
+        }
     },
 
     // Route: PUT /user/:id
-    // Logic to update a user's information
+    // update a user's information
     async updateUser(request, response) {
+        try {
+            let user = await User.findById(request.params.id);
+            
+            user.firstName = request.body.firstName;
+            user.lastName  = request.body.lastName;
+            user.email     = request.body.email;
+            user.password  = request.body.password;
+            user.role      = request.body.role;
+            
+            let result = await user.save();
+            response.json(result);
+        } catch (error) {
+            next(error);
+        }
     },
 
     // Route: DELETE /user/:id
-    // Logic to delete a user
+    // delete a user
     async deleteUser(request, response) {
+        try {
+            let result = await User.deleteOne({_id: request.params.id});
+            response.json(result);
+        } catch (error) {
+            next(error);
+        }
+
     }
 };
 

@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 
-const userSchema = new Schema({
+const UserSchema = new Schema({
     firstName: {
         type: String,
         required: [true, "First name is required"],
@@ -39,14 +39,12 @@ const userSchema = new Schema({
 });
 
 
-userSchema.pre("save", async function (next) {
+// userSchema.pre("save", async function (next) {
 
 
-    next();
-});
+//     next();
+// });
 
 
 
-const User = mongoose.model("User", userSchema);
-
-module.exports = { User }
+module.exports = mongoose.model('User', UserSchema);

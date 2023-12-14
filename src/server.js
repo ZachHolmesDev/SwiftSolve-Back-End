@@ -64,7 +64,13 @@ const TicketRouter = require('./routers/TicketRouter');
 app.use('/user', UserRouter);
 app.use('/ticket', TicketRouter);
 
-app.use('/',responseLogger);
+app.use(function (err, request, response, next) {
+    console.error(err.stack);
+    response.status(500).json({
+        message: err.message
+    });
+});
+// app.use('/',responseLogger);
 
 
 
