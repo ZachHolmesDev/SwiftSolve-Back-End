@@ -1,36 +1,84 @@
-const TicketModel = require('../models/TicketModel'); 
+const Ticket = require('../models/TicketModel'); 
+const buildUpdateDataFromModel = require('../utils/buildUpdateDataFromModel');
 
 const TicketController = {
     
     // Route: GET /ticket
-    async getAllTickets(request, response) {
-        // Logic to get all tickets
-        response.json({
-            message: "Test getting all tickets"
-        });
+    // get all tickets
+    async getAllTickets(request, response, next) {
+        try {
+            let tickets = await Ticket.find({});
+            response.json(tickets);
+        } catch (error) {
+            next(error);
+        }
     },
     
     // Route: GET /ticket/:ticketId
-    // Logic to get a specific ticket by ID
-    async getTicketById(request, response) {
-        response.json({
-            message: "Test getting a specific ticket by ID"
-        });
+    // get a ticket by ID
+    async getTicketById(request, response, next) {
+        try {
+            // look for ticket by ID
+            let ticket = await Ticket.findById(request.params.ticketId);
+            if (!ticket) {
+                return response.status(404).json({message : `Ticket with id : ${request.params.ticketId} not found`});
+            }
+            response.json(ticket);
+        } catch (error) {
+            next(error);
+        }
     },
     
     // Route: POST /ticket
-    // Logic to create a ticket
-    async createTicket(request, response) {
+    // create a ticket
+    async createTicket(request, response, next) {
+        try {
+            // create new ticket
+            let ticket = new TicketModel(request.body);
+            let result = await ticket.save();
+            response.json(result);
+        } catch (error) {
+            next(error);
+        }
     },
 
-    // Route: PUT /ticket/:ticketId
-    // Logic to update a ticket
-    async updateTicket(request, response) {
+    // Route: PATCH /ticket/:ticketId
+    // update a ticket
+    async updateTicket(request, response, next) {
+        try {
+            // look for ticket by ID
+            let ticket = await Ticket.findById(request.params.ticketId);
+            if (!ticket) {
+                return response.status(404).json({message : `Ticket with id : ${request.params.ticketId} not found`});
+            }
+
+            // build update data
+            let updateData = buildUpdateDataFromModel(request.body, Ticket);
+
+            // update ticket
+            let result = await Ticket.findByIdAndUpdate(request.params.ticketId, updateData, {new: true});
+            response.json(result);
+        } catch (error) {
+            next(error);
+        }
+
     },
 
     // Route: DELETE /ticket/:ticketId
-    // Logic to delete a ticket
-    async deleteTicket(request, response) {
+    // delete a ticket
+    async deleteTicket(request, response, next) {
+        try {
+            // look for ticket by ID
+            let ticket = await Ticket.findById(request.params.ticketId);
+            if (!ticket) {
+                return response.status(404).json({message : `Ticket with id : ${request.params.ticketId} not found`});
+            }
+            // delete ticket
+            let result = await Ticket.deleteOne({_id: request.params.ticketId});
+            response.json(result);
+        } catch (error) {
+            next(error);
+        }
     }
 };
 

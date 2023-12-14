@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 
-const ticketSchema = new Schema({
+const TicketSchema = new Schema({
     createdBy: {
         type: Schema.Types.ObjectId,
         ref: 'User',
@@ -42,6 +42,6 @@ const ticketSchema = new Schema({
 });
 
 
-const Ticket = mongoose.model('Ticket', ticketSchema);
+const Ticket = mongoose.model('Ticket', TicketSchema);
 
-module.exports = { Ticket }
+module.exports = Ticket;

@@ -9,6 +9,7 @@ const UserController = {
     // register a new user
     async registerUser(request, response, next) {
         try {
+            // create new user
             let user = new User(request.body);
             let result = await user.save();
             response.json(result);
@@ -27,6 +28,7 @@ const UserController = {
     // retrieve all users
     async getUsers(request, response, next) {
         try {
+            // look for users
             let users = await User.find({});
             response.json(users);
         } catch (error) {
@@ -82,10 +84,12 @@ async updateUser(request, response, next) {
     // delete a user
     async deleteUser(request, response, next) {
         try {
+            // look for user by ID
             const user = await User.findById(request.params.id);
             if (!user) {
                 return response.status(404).json({message : `User with id : ${request.params.id} not found`});
             }
+            // delete user
             let result = await User.deleteOne({_id: request.params.id});
             response.json(result);
         } catch (error) {

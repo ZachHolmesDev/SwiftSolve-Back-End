@@ -14,7 +14,7 @@ router.get('/:ticketId', TicketController.getTicketById);
 router.post('/', TicketController.createTicket);
 
 // Route to update a specific ticket by ID
-router.put('/:ticketId', TicketController.updateTicket);
+router.patch('/:ticketId', TicketController.updateTicket);
 
 // Route to delete a specific ticket by ID
 router.delete('/:ticketId', TicketController.deleteTicket);
