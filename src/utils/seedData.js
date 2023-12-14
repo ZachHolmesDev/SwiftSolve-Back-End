@@ -58,7 +58,7 @@ const ticketsSeedList = [
         createdBy  : "507f1f77bcf86cd799439013",    // Created by User 1
         assignedTo : "507f1f77bcf86cd799439011",    // Assigned to Admin 1
         category   : "General",
-        comments   : ["507f1f77bcf86cd799439018"]
+        comments   : ["507f1f77bcf86cd799439018", "507f1f77bcf86cd799439021"]
     },
     // Ticket 2
     {
@@ -88,6 +88,12 @@ const commentsSeedList = [
     {
         _id        : "507f1f77bcf86cd799439019", // Unique Object ID for Comment 2
         content    : "Acknowledging receipt of ticket. by Admin 2 on Ticket 2",
+        createdById: "507f1f77bcf86cd799439012", 
+        ticketId   : "507f1f77bcf86cd799439017", 
+    },
+    {
+        _id        : "507f1f77bcf86cd799439021", // Unique Object ID for Comment 2
+        content    : "Second comment by Admin 1 on Ticket 1.",
         createdById: "507f1f77bcf86cd799439012", 
         ticketId   : "507f1f77bcf86cd799439017", 
     },
