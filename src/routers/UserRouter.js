@@ -14,7 +14,7 @@ router.get('/', UserController.getUsers);
 router.get('/:id', UserController.getUserById);
 
 // Route to update a specific user by ID
-router.put('/:id', UserController.updateUser);
+router.patch('/:id', UserController.updateUser);
 
 // Route to delete a specific user by ID
 router.delete('/:id', UserController.deleteUser);
