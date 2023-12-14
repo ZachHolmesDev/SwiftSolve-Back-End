@@ -50,14 +50,15 @@ const usersSeedList = [
 const ticketsSeedList = [
     // Ticket 1
     {
-        _id        : "507f1f77bcf86cd799439016", // Unique Object ID for Ticket 1
+        _id        : "507f1f77bcf86cd799439016",    // Unique Object ID for Ticket 1
         title      : "First Ticket",
         description: "This is the first ticket.",
         status     : "open",
         priority   : "low",
-        createdBy  : "507f1f77bcf86cd799439013", // Created by User 1
-        assignedTo : "507f1f77bcf86cd799439011", // Assigned to Admin 1
+        createdBy  : "507f1f77bcf86cd799439013",    // Created by User 1
+        assignedTo : "507f1f77bcf86cd799439011",    // Assigned to Admin 1
         category   : "General",
+        comments   : ["507f1f77bcf86cd799439018"]
     },
     // Ticket 2
     {
@@ -69,6 +70,7 @@ const ticketsSeedList = [
         createdBy  : "507f1f77bcf86cd799439014", // Created by User 2
         assignedTo : null, // Unassigned
         category   : "Technical",
+        comments   : ["507f1f77bcf86cd799439019"]
     },
     // ... add more tickets as needed
 ];
@@ -77,15 +79,17 @@ const ticketsSeedList = [
 const commentsSeedList = [
     // Comment 1 for Ticket 1
     {
-        content    : "First comment",
-        createdById: "507f1f77bcf86cd799439011", // Comment by Admin 1
-        ticketId   : "507f1f77bcf86cd799439016", // Related to Ticket 1
+        _id        : "507f1f77bcf86cd799439018", // Unique Object ID for Comment 1
+        content    : "First comment by Admin 1 on Ticket 1",
+        createdById: "507f1f77bcf86cd799439011", 
+        ticketId   : "507f1f77bcf86cd799439016",
     },
     // Comment 2 for Ticket 2
     {
-        content    : "Acknowledging receipt of ticket.",
-        createdById: "507f1f77bcf86cd799439012", // Comment by Admin 2
-        ticketId   : "507f1f77bcf86cd799439017", // Related to Ticket 2
+        _id        : "507f1f77bcf86cd799439019", // Unique Object ID for Comment 2
+        content    : "Acknowledging receipt of ticket. by Admin 2 on Ticket 2",
+        createdById: "507f1f77bcf86cd799439012", 
+        ticketId   : "507f1f77bcf86cd799439017", 
     },
     // ... add more comments as needed
 ];

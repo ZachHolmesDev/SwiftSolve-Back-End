@@ -36,7 +36,11 @@ const TicketSchema = new Schema({
     },
     closedAt: {
         type: Date
-    }
+    },
+    comments: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Comment'
+    }]
 }, {
     timestamps: true
 });

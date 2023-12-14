@@ -18,10 +18,17 @@ const TicketController = {
     // get a ticket by ID
     async getTicketById(request, response, next) {
         try {
-            // look for ticket by ID
-            let ticket = await Ticket.findById(request.params.ticketId);
+            // look for ticket by ID  
+            let ticket = await Ticket.findById(request.params.ticketId)
+              .populate("createdBy")   // currently populating for testing purposes
+              .populate("assignedTo")
+              .populate("comments");
             if (!ticket) {
-                return response.status(404).json({message : `Ticket with id : ${request.params.ticketId} not found`});
+              return response
+                .status(404)
+                .json({
+                  message: `Ticket with id : ${request.params.ticketId} not found`,
+                });
             }
             response.json(ticket);
         } catch (error) {
