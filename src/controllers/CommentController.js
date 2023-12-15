@@ -6,9 +6,12 @@ const CommentController = {
     // Route: /ticket/:ticketId/comment
     // get all comments for a specific ticket
     async getCommentsForTicket(request, response) {
-        response.json({
-            message: "Test getting all comments for a specific ticket tick ID = " + request.params.ticketId
-        });
+        try {
+            let comments = await CommentModel.find({ticketId: request.params.ticketId});
+            response.json(comments);
+        } catch (error) {
+            next(error);
+        }
     },
 
     // Route: /ticket/:ticketId/comment/:commentId
