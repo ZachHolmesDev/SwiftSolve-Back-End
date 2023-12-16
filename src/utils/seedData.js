@@ -94,10 +94,10 @@ const commentsSeedList = [
     {
         _id        : "507f1f77bcf86cd799439021", // Unique Object ID for Comment 2
         content    : "Second comment by Admin 1 on Ticket 1.",
-        createdById: "507f1f77bcf86cd799439012", 
+        createdById: "507f1f77bcf86cd799439011", 
         ticketId   : "507f1f77bcf86cd799439016", 
     },
-    // ... add more comments as needed
+    // ... add more 
 ];
 
 
