@@ -1,4 +1,5 @@
 const CommentModel = require('../models/CommentModel'); 
+const TicketModel = require('../models/TicketModel');
 const buildUpdateDataFromModel = require('../utils/buildUpdateDataFromModel');
 
 const CommentController = {
@@ -7,7 +8,19 @@ const CommentController = {
     // get all comments for a specific ticket
     async getCommentsForTicket(request, response, next) {
         try {
+            const ticket = await TicketModel.findById(request.params.ticketId);
+            if (!ticket) {
+                return response.status(404).json({
+                    message: `Ticket with id : ${request.params.ticketId} not found`,
+                });
+            }
+
             const comments = await CommentModel.find({ticketId: request.params.ticketId});
+            if (!comments) {
+                return response.status(404).json({
+                    message: `No comments found for ticket with id : ${request.params.ticketId}`,
+                });
+            }
             response.json(comments);
         } catch (error) {
             next(error);
@@ -18,7 +31,7 @@ const CommentController = {
     // get a specific comment by ID
     async getCommentById(request, response, next) {
         try {
-            let comment = await CommentModel.findById(request.params.commentId);
+            const comment = await CommentModel.findById(request.params.commentId);
             response.json(comment);
         } catch (error) {
             next(error);
@@ -42,6 +55,7 @@ const CommentController = {
 
     // Route: /ticket/:ticketId/comment/:commentId
     // update a comment
+// FIXME not working
     async updateComment(request, response, next) {
         try {
             let comment = await CommentModel.findById(request.params.commentId);

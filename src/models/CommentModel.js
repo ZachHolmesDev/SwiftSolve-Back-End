@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 const commentSchema = new Schema({
     createdById: {
         type: Schema.Types.ObjectId,
-        required: [true, "Created by ID is required"],
+        // required: [true, "Created by ID is required"],
     },
     ticketId: {
         type: Schema.Types.ObjectId,
