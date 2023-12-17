@@ -58,7 +58,6 @@ const CommentController = {
 
 	// Route: /ticket/:ticketId/comment/:commentId
 	// update a comment
-	// FIXME not working
 	async updateComment(request, response, next) {
 		try {
 			let comment = await CommentModel.findById(request.params.commentId);
@@ -69,8 +68,8 @@ const CommentController = {
 			}
 			// build update data from model
 			let updateData = buildUpdateDataFromModel(
-				CommentModel,
-				request.body
+				request.body,
+				CommentModel
 			);
 			// update comment
 			comment = await CommentModel.findByIdAndUpdate(
@@ -89,18 +88,15 @@ const CommentController = {
 
 	// Route: /ticket/:ticketId/comment/:commentId
 	// delete a comment
-    // FIXME not working
 	async deleteComment(request, response, next) {
 		try {
-			let comment = await CommentModel.findById(request.params.commentId);
+			const comment = await CommentModel.findById(request.params.commentId);
 			if (!comment) {
 				return response.status(404).json({
 					message: `Comment with id : ${request.params.commentId} not found`,
 				});
 			}
-			let result = await CommentModel.deleteOne({
-				id: request.params.commentId,
-			});
+			let result = await CommentModel.deleteOne({ _id: request.params.commentId});
 			response.json(result);
 		} catch (error) {
 			next(error);

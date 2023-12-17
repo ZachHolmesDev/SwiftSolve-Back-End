@@ -13,7 +13,7 @@ router.get('/:commentId', CommentController.getCommentById);
 router.post('/', CommentController.createComment);
 
 // route to update a specific comment by ID
-router.put('/:commentId', CommentController.updateComment);
+router.patch('/:commentId', CommentController.updateComment);
 
 // route to delete a specific comment by ID
 router.delete('/:commentId', CommentController.deleteComment);
