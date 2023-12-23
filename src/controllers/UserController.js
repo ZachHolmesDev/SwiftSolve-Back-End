@@ -10,9 +10,15 @@ const UserController = {
     async registerUser(request, response, next) {
         try {
             // create new user
+
             let user = new User(request.body);
+            
             let result = await user.save();
+            
+            
             response.json(result);
+
+
         } catch (error) {
             next(error);
         }

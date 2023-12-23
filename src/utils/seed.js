@@ -8,8 +8,19 @@ const {
   ticketsSeedList,
   commentsSeedList,
 } = require("./seedData");
-
 require("dotenv").config();
+const bcrypt = require("bcryptjs");
+
+async function hashUserPasswords(users) {
+  const hashedUsers = [];
+
+  for (const user of users) {
+      const hashedPassword = await bcrypt.hash(user.password, 10);
+      hashedUsers.push({ ...user, password: hashedPassword });
+  }
+
+  return hashedUsers;
+}
 
 databaseConnect()
   .then(async () => {
@@ -19,7 +30,9 @@ databaseConnect()
     await Comment.deleteMany({});
 
     console.log("Seeding database...");
-    await User.insertMany(usersSeedList);
+    const hashedUsers = await hashUserPasswords(usersSeedList);
+    
+    await User.insertMany(hashedUsers);
     await Ticket.insertMany(ticketsSeedList);
     await Comment.insertMany(commentsSeedList);
 

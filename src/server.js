@@ -27,7 +27,7 @@ databaseConnect()
 // util routes 
 const {requestLogger, responseLogger} = require('./utils/loggers');
 
-// log all requests
+// log all requests in console
 app.use(requestLogger);
 
 

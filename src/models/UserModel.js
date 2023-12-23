@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const bcrypt = require("bcryptjs");
 
 
 const UserSchema = new Schema({
@@ -26,7 +27,7 @@ const UserSchema = new Schema({
         type: String,
         required: [true, "Password is required"],
         trim: true,
-        minlength: 10,
+        minlength: 8,
     },
     role: {
         type: String,
@@ -43,11 +44,24 @@ const UserSchema = new Schema({
 });
 
 
-// userSchema.pre("save", async function (next) {
-
-
-//     next();
-// });
+UserSchema.pre("save", function(next) {
+    if (this.isModified("password") || this.isNew) {
+        bcrypt.genSalt(10, (saltError, salt) => {
+            if (saltError) {
+                return next(saltError);
+            }
+            bcrypt.hash(this.password, salt, (hashError, hash) => {
+                if (hashError) {
+                    return next(hashError);
+                }
+                this.password = hash;
+                next();
+            });
+        });
+    } else {
+        return next();
+    }
+});
 
 const User = mongoose.model("User", UserSchema);
 
