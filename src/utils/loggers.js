@@ -37,7 +37,7 @@ async function requestLogger(req, res, next) {
     if (Object.keys(req.body).length) {
         console.log(chalk.blue('  Body   : \n') + JSON.stringify(req.body, null, "\t"));
     }
-    console.log('\n'); // Add space below
+    // console.log('\n'); // Add space below
 
     next();
 }

@@ -20,14 +20,12 @@ app.use(express.urlencoded({ extended: true }));
 // Middleware for logging in console
 app.use(requestLogger);
 
-
 // connect to database
 databaseConnect()
 
 
 // ---------
 // routes 
-
 
 // test route
 app.get("/", (request, response) => {
@@ -36,15 +34,14 @@ app.get("/", (request, response) => {
 	});
 });
 
-
 // routers
 const UserRouter = require('./routers/UserRouter');
 const TicketRouter = require('./routers/TicketRouter');
 const AuthRouter = require('./routers/AuthRouter');
 
 app.use('/auth', AuthRouter );
-app.use('/user', UserRouter);
-app.use('/ticket', TicketRouter);
+app.use('/user', validateJWT, UserRouter);
+app.use('/ticket', validateJWT , TicketRouter);
 
 
 // error handler
