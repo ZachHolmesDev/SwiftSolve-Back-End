@@ -1,6 +1,5 @@
 const User = require('../models/UserModel');
 const { generateJWT, passwordMatches } = require('../utils/authFunctions');
-const buildUpdateDataFromModel = require('../utils/buildUpdateDataFromModel');
 
 const AuthController = {
 
